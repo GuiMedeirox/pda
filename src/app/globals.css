@@ -1,26 +1,74 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* papel & tinta */
+  --papel: #faf3e7;
+  --papel-alto: #fffdf7;
+  --tinta: #2b241c;
+  --tinta-suave: #6b5d4d;
+  --linha: #e8dcc4;
+  --linha-forte: #d9c9a8;
+
+  /* caneta terracota + mel */
+  --caneta: #c2410c;
+  --caneta-escura: #9a3412;
+  --mel: #d97706;
+  --mel-suave: #fef3e2;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-papel: var(--papel);
+  --color-papel-alto: var(--papel-alto);
+  --color-tinta: var(--tinta);
+  --color-tinta-suave: var(--tinta-suave);
+  --color-linha: var(--linha);
+  --color-linha-forte: var(--linha-forte);
+  --color-caneta: var(--caneta);
+  --color-caneta-escura: var(--caneta-escura);
+  --color-mel: var(--mel);
+  --color-mel-suave: var(--mel-suave);
+  --font-sans: var(--font-nunito);
+  --font-display: var(--font-fraunces);
+  --font-nota: var(--font-caveat);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--papel);
+  /* pauta de caderno bem sutil + halo quente no topo */
+  background-image:
+    radial-gradient(1100px 420px at 50% -140px, rgba(217, 119, 6, 0.09), transparent 70%),
+    repeating-linear-gradient(
+      to bottom,
+      transparent 0px,
+      transparent 31px,
+      rgba(120, 90, 40, 0.045) 31px,
+      rgba(120, 90, 40, 0.045) 32px
+    );
+  color: var(--tinta);
+  font-family: var(--font-nunito), system-ui, sans-serif;
+}
+
+/* entrada suave das seções, respeitando quem prefere menos movimento */
+@keyframes subir {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.entrada {
+  animation: subir 0.55s cubic-bezier(0.22, 0.9, 0.3, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .entrada {
+    animation: none;
+  }
+  * {
+    transition-duration: 0.01ms !important;
+  }
 }
